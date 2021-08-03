@@ -26,6 +26,8 @@ class ListCard extends Card
 
     public $heading = [];
 
+    public $columnWidth = ['left' => '3/4', 'right' => '1/4'];
+
     public $subtitleEnabled = false;
 
     public $subtitleColumn;
@@ -99,6 +101,13 @@ class ListCard extends Card
     {
         $this->heading = ['left' => $left, 'right' => $right];
         $this->classes(Str::slug($left));
+
+        return $this;
+    }
+
+    public function columnWidth($left, $right)
+    {
+        $this->columnWidth = ['left' => $left, 'right' => $right];
 
         return $this;
     }
@@ -182,6 +191,7 @@ class ListCard extends Card
             'order_direction' => $this->orderDirection,
             'classes' => $this->classes,
             'heading' => $this->heading,
+            'columnWidth' => $this->columnWidth,
             'subtitle_enabled' => $this->subtitleEnabled,
             'subtitle_column' => $this->subtitleColumn,
             'value_column' => $this->valueColumn,

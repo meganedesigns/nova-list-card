@@ -4,8 +4,8 @@
       class="nova-list-card-heading flex border-b pb-2 mb-2 border-50"
       v-if="card.heading.length != 0"
     >
-      <div class="truncate left" :class="{'w-3/4': card.heading.right}">{{ card.heading.left }}</div>
-      <div class="w-1/4 truncate right" v-if="card.heading.right">{{ card.heading.right }}</div>
+      <div class="truncate left" :class="`w-${card.columnWidth.left}`">{{ card.heading.left }}</div>
+      <div class="truncate right" :class="`w-${card.columnWidth.right}`" v-if="card.heading.right">{{ card.heading.right }}</div>
     </div>
     <div class="nova-list-card-body relative">
       <div
@@ -48,7 +48,7 @@
         >
           <div class="flex py-1">
             <div
-              :class="{'w-full': card.value_column == null, 'w-3/4 pr-4': card.value_column != null}"
+              :class="(card.value_column == null ? 'w-full' : `w-${card.columnWidth.left} pr-4`)"
             >
               <p
                 class="nova-list-card-title truncate no-underline dim text-primary font-bold"
@@ -71,7 +71,8 @@
             </div>
             <div
               v-if="card.value_column != null"
-              class="nova-list-card-value w-1/4 truncate"
+              class="nova-list-card-value truncate"
+              :class="`w-${card.columnWidth.right}`"
             >{{ formatValue(item, card.value_format) }}</div>
           </div>
         </router-link>
